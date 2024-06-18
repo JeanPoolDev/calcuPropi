@@ -1,15 +1,31 @@
 import { useState } from "react";
-import { OrderItem } from "../types";
+import { MenuItem, OrderItem } from "../types";
 
 const useOrder = () => {
   
   const [order, setOrder] = useState<OrderItem[]>([])
 
-  const addItem = (id: number) => {
-    alert(`La id es ${id}`)
+  const addItem = (item: MenuItem) => {
+    
+    const itemExist = order.find(orderItem => orderItem.id === item.id)
+    
+    if(itemExist) {  
+      const updateOrder = order.map(orderItem => orderItem.id === item.id 
+        ? {...orderItem, quantity: orderItem.quantity + 1} 
+        : orderItem
+      )
+        setOrder(updateOrder)
+    } else {
+        const newItem = { ...item, quantity: 1 }
+        setOrder([ ...order, newItem ])
+    }
+
   }
 
-  return { addItem }
+  return { 
+    order,
+    addItem
+   }
 }
  
 export default useOrder;
