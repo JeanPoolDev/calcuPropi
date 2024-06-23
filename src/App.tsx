@@ -1,16 +1,19 @@
 import MenuItems from "./components/MenuItems"
 import OrderContents from "./components/OrderContents"
+import { OrderTotals } from "./components/OrderTotals"
+import { PorcentageForm } from "./components/PorcentageForm"
+import { Card } from "./components/ui/card"
 import { menuItems } from "./data/db"
 import useOrder from "./hooks/useOrder"
 
 function App() {
 
-  const { order ,addItem } = useOrder()
+  const { order, tip, setTip, addItem, removeItem } = useOrder()
 
   return (
     <>
-      <header className="bg-teal-200 py-5">
-        <h1 className="text-center text-2xl font-bold">
+      <header className="bg-teal-200 py-5 ">
+        <h1 className="text-center text-2xl font-bold ">
           App de Calculadora de Propinas y Consumo
         </h1>
       </header>
@@ -31,11 +34,23 @@ function App() {
 
         </div>
 
-        <div className="space-y-10">
-          <OrderContents order={order}/>
-        </div>
+        <Card className="space-y-10 m-5">
+          <OrderContents 
+            order={order} 
+            removeItem={removeItem} />
+
+          <PorcentageForm
+            setTip={setTip} 
+          /> 
+
+          <OrderTotals 
+            order={order}
+            tip={tip}
+            /> 
+        </Card>
 
         
+
       </main>
     </>
   )
