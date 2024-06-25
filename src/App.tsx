@@ -8,7 +8,7 @@ import useOrder from "./hooks/useOrder"
 
 function App() {
 
-  const { order, tip, setTip, addItem, removeItem } = useOrder()
+  const { order, tip, setTip, addItem, removeItem, replaceOrder } = useOrder()
 
   return (
     <>
@@ -40,12 +40,14 @@ function App() {
             removeItem={removeItem} />
 
           <PorcentageForm
-            setTip={setTip} 
+            setTip={setTip}
+            tip={tip} 
           /> 
 
           <OrderTotals 
             order={order}
             tip={tip}
+            replaceOrder={replaceOrder}
             /> 
         </Card>
 

@@ -26,12 +26,18 @@ const useOrder = () => {
     setOrder(removeOrder)
   }
 
+  const replaceOrder = () => {
+    setOrder([])
+    setTip(0)
+  }
+
   return { 
     order,
     tip,
     setTip,
     addItem,
-    removeItem
+    removeItem,
+    replaceOrder
    }
 }
  
